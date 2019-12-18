@@ -17,9 +17,10 @@ describe('app routes', () => {
 
   let trade;
   beforeEach(async() => {
+    
     trade = await Trade.create({
-      year: new Date(),
-      Time_ref: new Date(),
+      year: new Date('2013-04-11'),
+      Time_ref: new Date('2013-04-11'),
       magnitude: 3,
       unit: 'Dollers',
       country_code: 'UPC',
@@ -41,8 +42,8 @@ describe('app routes', () => {
     return request(app)
       .post('/api/v1/trades')
       .send({
-        byear: new Date(),
-        Time_ref: new Date(),
+        year: new Date('2013-04-11'),
+        Time_ref: new Date('2013-04-11'),
         magnitude: 3,
         unit: 'Dollers',
         country_code: 'UPC',
@@ -58,8 +59,8 @@ describe('app routes', () => {
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          year: expect.any(Date),
-          Time_ref: expect.any(Date),
+          year: '2013-04-11T00:00:00.000Z',
+          Time_ref: '2013-04-11T00:00:00.000Z',
           magnitude: 3,
           unit: 'Dollers',
           country_code: 'UPC',
@@ -78,12 +79,12 @@ describe('app routes', () => {
 
   it('gets a trade data entry by Id', () => {
     return request(app)
-      .get(`/api/v1/trades/${trade.id}`)
+      .get(`/api/v1/trades/${trade._id}`)
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          year: expect.any(Date),
-          Time_ref: expect.any(Date),
+          year: '2013-04-11T00:00:00.000Z',
+          Time_ref: '2013-04-11T00:00:00.000Z',
           magnitude: 3,
           unit: 'Dollers',
           country_code: 'UPC',
@@ -107,8 +108,8 @@ describe('app routes', () => {
         expect(res.body).toEqual([
           {
             _id: expect.any(String),
-            year: expect.any(Date),
-            Time_ref: expect.any(Date),
+            year: '2013-04-11T00:00:00.000Z',
+            Time_ref: '2013-04-11T00:00:00.000Z',
             magnitude: 3,
             unit: 'Dollers',
             country_code: 'UPC',
@@ -127,13 +128,13 @@ describe('app routes', () => {
   });
   it('updates a trade data entry', () => {
     return request(app)
-      .patch(`/api/v1/trades/${trade.id}`)
+      .patch(`/api/v1/trades/${trade._id}`)
       .send({ goods_exports: 1500 })
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          year: expect.any(Date),
-          Time_ref: expect.any(Date),
+          year: '2013-04-11T00:00:00.000Z',
+          Time_ref: '2013-04-11T00:00:00.000Z',
           magnitude: 3,
           unit: 'Dollers',
           country_code: 'UPC',
@@ -151,12 +152,12 @@ describe('app routes', () => {
   });
   it('deletes a trade entry', () => {
     return request(app)
-      .delete(`/api/v1/trades/${trade.id}`)
+      .delete(`/api/v1/trades/${trade._id}`)
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          year: expect.any(Date),
-          Time_ref: expect.any(Date),
+          year: '2013-04-11T00:00:00.000Z',
+          Time_ref: '2013-04-11T00:00:00.000Z',
           magnitude: 3,
           unit: 'Dollers',
           country_code: 'UPC',
